@@ -20,6 +20,7 @@ class RagService
     public function __construct(
         private Retriever $retriever,
         private ProviderFactory $providers,
+        private PromptGuard $guard,
     ) {}
 
     /** Create a pending query record and log the submission. */
@@ -37,6 +38,16 @@ class RagService
             'resource_id'   => (string) $query->id,
             'provider'      => $query->chat_provider,
         ]);
+
+        // (c) Flag obvious instruction-override phrasing — logged, never silently dropped.
+        $flags = $this->guard->flagInput($question);
+        if (! empty($flags)) {
+            AuditLog::record('rag.query.flagged_input', [
+                'resource_type' => 'query',
+                'resource_id'   => (string) $query->id,
+                'meta'          => ['indicators' => $flags],
+            ]);
+        }
 
         return $query;
     }
@@ -61,8 +72,23 @@ class RagService
             $result = $this->providers->chat()
                 ->chat($system, $user, ['temperature' => 0.1, 'max_tokens' => 400]);
 
+            // (b) Output guard: an answer must cite a valid source or be a legitimate
+            // "no info" refusal. Anything ungrounded is replaced with a safe fallback,
+            // so injected text can't surface an unsupported answer.
+            $answer = $result['text'];
+            $check  = $this->guard->checkGrounding($answer, count($sources));
+            if (! $check['grounded']) {
+                AuditLog::record('rag.query.ungrounded', [
+                    'resource_type' => 'query',
+                    'resource_id'   => (string) $query->id,
+                    'provider'      => $query->chat_provider,
+                    'meta'          => ['hallucinated_citations' => $check['hallucinated']],
+                ]);
+                $answer = $this->guard->safeFallback();
+            }
+
             return $this->complete(
-                $query, $started, $result['text'],
+                $query, $started, $answer,
                 $this->formatSources($sources),
                 $result['prompt_tokens'], $result['completion_tokens']
             );
