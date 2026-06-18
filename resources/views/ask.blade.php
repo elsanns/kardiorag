@@ -39,7 +39,7 @@
         </div>
     @endif
 
-    <script>
+    <script nonce="{{ $cspNonce ?? '' }}">
     const csrf = document.querySelector('meta[name=csrf-token]').content;
     const form = document.getElementById('ask-form');
     const input = document.getElementById('question');
