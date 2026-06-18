@@ -11,7 +11,7 @@ return [
 
     // Retrieval
     'retrieval' => [
-        'top_k' => 4,
+        'top_k' => 6,
     ],
 
     // Chunking (characters; simple + deterministic for the demo)
