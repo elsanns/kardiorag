@@ -1,0 +1,39 @@
+# --- Local AI runtime & models (large; never commit) ---
+runtime/ollama/
+
+# --- Secrets / credentials (never commit) ---
+.env
+.env.*
+!.env.example
+*.token
+*token*
+*.key
+*.pem
+auth.json
+
+# --- PHP / Laravel ---
+/vendor/
+/node_modules/
+/public/build/
+/public/hot
+/public/storage
+/storage/*.key
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/logs/*
+/bootstrap/cache/*
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# --- Docs (keep local, do not commit) ---
+*.md
