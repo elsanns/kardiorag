@@ -5,6 +5,7 @@ namespace App\Services\Rag;
 use App\Models\AuditLog;
 use App\Models\Query;
 use App\Services\Llm\ProviderFactory;
+use Illuminate\Support\Str;
 use Throwable;
 
 /**
@@ -142,16 +143,24 @@ class RagService
     /** @param list<array> $sources */
     private function formatSources(array $sources): array
     {
-        return array_map(fn ($i, $s) => [
-            'n'            => $i + 1,
-            'drug_brand'   => $s['drug_brand'],
-            'drug_generic' => $s['drug_generic'],
-            'field'        => $s['field'],
-            'title'        => $s['title'],
-            'url'          => $s['url'],
-            'distance'     => round((float) $s['distance'], 4),
-            'chunk_id'     => $s['id'],
-        ], array_keys($sources), $sources);
+        return array_map(function ($i, $s) {
+            // The exact retrieved passage that grounded the answer. Whitespace-collapsed so
+            // it renders cleanly inline; the UI shows the snippet and can expand to full.
+            $content = trim((string) preg_replace('/\s+/', ' ', (string) ($s['content'] ?? '')));
+
+            return [
+                'n'            => $i + 1,
+                'drug_brand'   => $s['drug_brand'],
+                'drug_generic' => $s['drug_generic'],
+                'field'        => $s['field'],
+                'title'        => $s['title'],
+                'url'          => $s['url'],
+                'distance'     => round((float) $s['distance'], 4),
+                'chunk_id'     => $s['id'],
+                'snippet'      => Str::limit($content, 240),
+                'content'      => $content,
+            ];
+        }, array_keys($sources), $sources);
     }
 
     /** @param list<array> $sources */

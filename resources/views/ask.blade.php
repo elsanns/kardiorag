@@ -105,17 +105,42 @@
         (data.sources || []).forEach(s => {
             // Build with DOM nodes + textContent (never innerHTML) so source/model text can't inject markup.
             const li = document.createElement('li');
+
+            const head = document.createElement('div'); head.className = 'src-head';
             const n = document.createElement('span'); n.className = 'n'; n.textContent = `[${s.n}]`;
             const name = document.createElement('strong'); name.textContent = s.drug_brand || s.drug_generic || '';
+            head.append(n, ' ', name, ' — ', document.createTextNode(s.title ?? ''));
+
+            // Cited passage shown inline — the actual evidence, so the user doesn't have to
+            // hunt for it on the external label page. Collapsed to the snippet, expandable.
+            const full = s.content || s.snippet || '';
+            const brief = s.snippet || full;
+            const quote = document.createElement('blockquote'); quote.className = 'quote';
+            quote.textContent = brief;
+
             const meta = document.createElement('div'); meta.className = 'meta';
             meta.textContent = `${s.drug_generic ?? ''} · distance ${s.distance}`;
+
+            if (full && full.length > brief.length) {
+                let expanded = false;
+                const toggle = document.createElement('button');
+                toggle.type = 'button'; toggle.className = 'src-toggle'; toggle.textContent = 'show more';
+                toggle.addEventListener('click', () => {
+                    expanded = !expanded;
+                    quote.textContent = expanded ? full : brief;
+                    toggle.textContent = expanded ? 'show less' : 'show more';
+                });
+                meta.append(' · ', toggle);
+            }
+
             const url = safeHttpUrl(s.url);
             if (url) {
                 const a = document.createElement('a');
-                a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = 'source';
+                a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = 'view full label ↗';
                 meta.append(' · ', a);
             }
-            li.append(n, ' ', name, ' — ', document.createTextNode(s.title ?? ''), meta);
+
+            li.append(head, quote, meta);
             sourcesEl.appendChild(li);
         });
         metaEl.textContent = `provider: ${data.provider} · ${data.latency_ms ?? '–'} ms · query #${data.query_id}`;

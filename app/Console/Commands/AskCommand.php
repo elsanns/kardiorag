@@ -34,6 +34,9 @@ class AskCommand extends Command
             $this->comment('Sources:');
             foreach ($query->sources as $s) {
                 $this->line("  [{$s['n']}] {$s['drug_brand']} — {$s['title']} (dist {$s['distance']})");
+                if (! empty($s['snippet'])) {
+                    $this->line("      \"{$s['snippet']}\"");
+                }
             }
         }
 
