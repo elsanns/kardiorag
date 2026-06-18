@@ -28,7 +28,7 @@ class RagService
         $query = Query::create([
             'question'       => $question,
             'status'         => 'pending',
-            'chat_provider'  => config('kardiorag.chat_provider'),
+            'chat_provider'  => $this->providers->activeChatName(),
             'embed_provider' => config('kardiorag.embed_provider'),
         ]);
 

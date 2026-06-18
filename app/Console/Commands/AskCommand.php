@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Services\Llm\ProviderFactory;
 use App\Services\Rag\RagService;
 use Illuminate\Console\Command;
 
@@ -11,12 +12,12 @@ class AskCommand extends Command
 
     protected $description = 'Ask the cardiology RAG assistant a question (CLI)';
 
-    public function handle(RagService $rag): int
+    public function handle(RagService $rag, ProviderFactory $providers): int
     {
         $question = implode(' ', $this->argument('question'));
 
         $this->info("Q: {$question}");
-        $this->line('Thinking (provider: ' . config('kardiorag.chat_provider') . ') ...');
+        $this->line('Thinking (provider: ' . $providers->activeChatLabel() . ') ...');
         $this->newLine();
 
         $query = $rag->ask($question);

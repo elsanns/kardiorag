@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Jobs\AnswerQuestionJob;
 use App\Models\Query;
+use App\Services\Llm\ProviderFactory;
 use App\Services\Rag\RagService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -12,13 +13,13 @@ use Illuminate\View\View;
 class AskController extends Controller
 {
     /** Ask page with a few recent questions. */
-    public function index(): View
+    public function index(ProviderFactory $providers): View
     {
         $recent = Query::latest()->limit(8)->get(['id', 'question', 'status', 'created_at']);
 
         return view('ask', [
             'recent'   => $recent,
-            'provider' => config('kardiorag.chat_provider'),
+            'provider' => $providers->activeChatLabel(),
         ]);
     }
 

@@ -15,26 +15,25 @@ use RuntimeException;
  */
 class ClaudeProvider implements LlmProvider
 {
-    public function __construct(private array $config) {}
+    public function __construct(private array $config)
+    {
+        if (empty($this->config['api_key'])) {
+            throw new RuntimeException('ANTHROPIC_API_KEY is not set but cloud provider "anthropic" was selected.');
+        }
+    }
 
     public function name(): string
     {
-        return 'claude';
+        return 'anthropic';
     }
 
     public function embed(array $texts): array
     {
-        throw new RuntimeException(
-            'ClaudeProvider does not provide embeddings; use the local embed provider.'
-        );
+        throw new RuntimeException('Cloud tier is chat-only; embeddings stay on the local provider.');
     }
 
     public function chat(string $system, string $user, array $options = []): array
     {
-        if (empty($this->config['api_key'])) {
-            throw new RuntimeException('ANTHROPIC_API_KEY is not configured.');
-        }
-
         $res = Http::timeout($this->config['timeout'])
             ->withHeaders([
                 'x-api-key'         => $this->config['api_key'],
