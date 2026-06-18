@@ -70,6 +70,10 @@ return [
     'openfda' => [
         'base_url' => rtrim(env('OPENFDA_BASE_URL', 'https://api.fda.gov'), '/'),
         'api_key'  => env('OPENFDA_API_KEY', ''),
+        // Shown in API responses. openFDA data is U.S. public domain (no copyright); the
+        // obligations are non-copyright: surface the disclaimer, don't imply FDA endorsement.
+        'disclaimer' => 'Source: openFDA (U.S. FDA, public domain). For demonstration only — '
+            . 'not for clinical decision-making; no FDA endorsement implied.',
         // Default curated set of cardiology-relevant generics for ingestion.
         'default_drugs' => [
             'amiodarone', 'metoprolol', 'warfarin', 'atorvastatin',

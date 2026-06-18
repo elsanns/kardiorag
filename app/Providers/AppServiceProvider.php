@@ -34,5 +34,8 @@ class AppServiceProvider extends ServiceProvider
     {
         // Rate-limit the ask endpoint (per-IP) to protect the model backend.
         RateLimiter::for('ask', fn (Request $request) => Limit::perMinute(10)->by($request->ip()));
+
+        // Default limiter for the API middleware group (per-IP).
+        RateLimiter::for('api', fn (Request $request) => Limit::perMinute(60)->by($request->ip()));
     }
 }
