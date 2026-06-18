@@ -42,13 +42,13 @@ return [
     'providers' => [
         'openai' => [
             'api_key'    => env('OPENAI_API_KEY', ''),
-            'chat_model' => env('OPENAI_CHAT_MODEL', 'gpt-4o'),
+            'chat_model' => env('OPENAI_CHAT_MODEL', 'gpt-5'),
             'base_url'   => rtrim(env('OPENAI_BASE_URL', 'https://api.openai.com'), '/'),
             'timeout'    => 120,
         ],
         'gemini' => [
             'api_key'    => env('GEMINI_API_KEY', ''),
-            'chat_model' => env('GEMINI_CHAT_MODEL', 'gemini-2.0-flash'),
+            'chat_model' => env('GEMINI_CHAT_MODEL', 'gemini-3-flash-preview'),
             'base_url'   => rtrim(env('GEMINI_BASE_URL', 'https://generativelanguage.googleapis.com'), '/'),
             'timeout'    => 120,
         ],
