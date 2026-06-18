@@ -51,7 +51,11 @@
     const sourcesEl = document.getElementById('sources');
     const metaEl = document.getElementById('meta');
 
-    function esc(s) { const d = document.createElement('div'); d.textContent = s ?? ''; return d.innerHTML; }
+    // Only allow http(s) links (blocks javascript:/data: schemes in citation URLs).
+    function safeHttpUrl(u) {
+        try { const x = new URL(u); return (x.protocol === 'https:' || x.protocol === 'http:') ? x.href : null; }
+        catch (_) { return null; }
+    }
 
     document.querySelectorAll('[data-q]').forEach(a =>
         a.addEventListener('click', e => { e.preventDefault(); input.value = a.dataset.q; form.requestSubmit(); }));
@@ -97,12 +101,21 @@
         result.style.display = 'block';
         answerEl.classList.remove('error');
         answerEl.textContent = data.answer || '';
-        sourcesEl.innerHTML = '';
+        sourcesEl.replaceChildren();
         (data.sources || []).forEach(s => {
+            // Build with DOM nodes + textContent (never innerHTML) so source/model text can't inject markup.
             const li = document.createElement('li');
-            const link = s.url ? ` · <a href="${esc(s.url)}" target="_blank" rel="noopener">source</a>` : '';
-            li.innerHTML = `<span class="n">[${s.n}]</span> <strong>${esc(s.drug_brand || s.drug_generic)}</strong> — ${esc(s.title)}`
-                + `<div class="meta">${esc(s.drug_generic)} · distance ${esc(String(s.distance))}${link}</div>`;
+            const n = document.createElement('span'); n.className = 'n'; n.textContent = `[${s.n}]`;
+            const name = document.createElement('strong'); name.textContent = s.drug_brand || s.drug_generic || '';
+            const meta = document.createElement('div'); meta.className = 'meta';
+            meta.textContent = `${s.drug_generic ?? ''} · distance ${s.distance}`;
+            const url = safeHttpUrl(s.url);
+            if (url) {
+                const a = document.createElement('a');
+                a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = 'source';
+                meta.append(' · ', a);
+            }
+            li.append(n, ' ', name, ' — ', document.createTextNode(s.title ?? ''), meta);
             sourcesEl.appendChild(li);
         });
         metaEl.textContent = `provider: ${data.provider} · ${data.latency_ms ?? '–'} ms · query #${data.query_id}`;

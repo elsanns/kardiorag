@@ -30,6 +30,14 @@ class AskController extends Controller
             'question' => ['required', 'string', 'min:5', 'max:500'],
         ]);
 
+        // Global daily ceiling on generations (cost/DoS guard, on top of per-IP throttling).
+        $cap = (int) config('kardiorag.limits.daily_queries', 200);
+        if (Query::whereDate('created_at', today())->count() >= $cap) {
+            return response()->json([
+                'message' => 'Daily query limit reached. Please try again tomorrow.',
+            ], 429);
+        }
+
         $query = $rag->startQuery(trim($data['question']));
         AnswerQuestionJob::dispatch($query->id);
 

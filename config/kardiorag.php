@@ -24,6 +24,12 @@ return [
         'top_k' => 6,
     ],
 
+    // Abuse/cost guards. Per-IP throttling is on the routes; this is a global daily
+    // ceiling on generated answers (protects the model backend + cloud spend).
+    'limits' => [
+        'daily_queries' => (int) env('LLM_DAILY_CAP', 200),
+    ],
+
     // Chunking (characters; simple + deterministic for the demo)
     'chunk' => [
         'size'    => 900,

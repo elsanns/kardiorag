@@ -10,6 +10,8 @@ Route::get('/', [AskController::class, 'index'])->name('ask.index');
 Route::post('/ask', [AskController::class, 'submit'])
     ->middleware('throttle:ask')
     ->name('ask.submit');
-Route::get('/ask/{query}/status', [AskController::class, 'status'])->name('ask.status');
+Route::get('/ask/{query}/status', [AskController::class, 'status'])
+    ->middleware('throttle:120,1')
+    ->name('ask.status');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
