@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use App\Services\OpenFda\OpenFdaClient;
 use App\Services\Rag\Chunker;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -29,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Rate-limit the ask endpoint (per-IP) to protect the model backend.
+        RateLimiter::for('ask', fn (Request $request) => Limit::perMinute(10)->by($request->ip()));
     }
 }

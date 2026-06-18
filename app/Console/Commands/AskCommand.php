@@ -19,20 +19,25 @@ class AskCommand extends Command
         $this->line('Thinking (provider: ' . config('kardiorag.chat_provider') . ') ...');
         $this->newLine();
 
-        $result = $rag->ask($question);
+        $query = $rag->ask($question);
 
-        $this->line($result['answer']);
+        if ($query->status === 'failed') {
+            $this->error('Generation failed: ' . $query->error);
+            return self::FAILURE;
+        }
+
+        $this->line($query->answer);
         $this->newLine();
 
-        if (! empty($result['sources'])) {
+        if (! empty($query->sources)) {
             $this->comment('Sources:');
-            foreach ($result['sources'] as $s) {
+            foreach ($query->sources as $s) {
                 $this->line("  [{$s['n']}] {$s['drug_brand']} — {$s['title']} (dist {$s['distance']})");
             }
         }
 
         $this->newLine();
-        $this->line("provider={$result['provider']}  latency={$result['latency_ms']}ms  query_id={$result['query_id']}");
+        $this->line("provider={$query->chat_provider}  latency={$query->latency_ms}ms  query_id={$query->id}");
 
         return self::SUCCESS;
     }
