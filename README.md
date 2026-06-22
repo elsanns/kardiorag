@@ -57,20 +57,6 @@ niepustą odpowiedź z cytatami do źródeł:
 - `What drugs interact with digoxin?`
 - `What adverse reactions can furosemide cause?`
 
-## Interfejs
-
-<img src="docs/img/ui-result.png" alt="Wynik zapytania z cytatami i fragmentami źródłowymi" width="800">
-
-*Wynik zapytania: odpowiedź z cytatami `[n]` oraz rozwijane fragmenty źródłowe, każdy z odległością wektorową i linkiem do pełnej etykiety.*
-
-<img src="docs/img/ui-citation-dailymed.png" alt="Pełna etykieta leku w DailyMed otwarta z cytatu" width="800">
-
-*Link „view full label ↗" przy cytacie otwiera pełną etykietę produktu w DailyMed (tu: Pacerone / amiodarone).*
-
-<img src="docs/img/ui-dashboard.png" alt="Panel ze statystykami ingestu i zapytań" width="800">
-
-*Panel (dashboard): statystyki zaimportowanej bazy wiedzy (leki, dokumenty, chunki) oraz analityka zapytań.*
-
 ## Bezpieczeństwo
 
 **Legenda:** ✅ obsługiwane · 🟡 częściowo · ❌ nieobsługiwane *(planowane / poza zakresem)* · w opisie etykieta **TODO** oznacza pracę do wykonania
@@ -93,3 +79,9 @@ niepustą odpowiedź z cytatami do źródeł:
 | `authentication` / access-control | ❌ | Poza zakresem (świadomie); uwierzytelnianie/RBAC jako future work. |
 | `info-disclosure` (debug/errors) | ❌ | **TODO** `APP_DEBUG=false` + `APP_ENV=production`; generyczne strony błędów. |
 | `supply-chain` | ❌ | **TODO** pinowanie/patchowanie zależności Composer, binarki Ollama i modeli; skan podatności. |
+
+## Interfejs
+
+<img src="docs/img/ui-result.png" alt="Wynik zapytania z cytatami i fragmentami źródłowymi" width="760">
+
+*Wynik zapytania: odpowiedź z cytatami `[n]` oraz rozwijane fragmenty źródłowe (tu pierwsze trafienia), każde z odległością wektorową i linkiem do pełnej etykiety.*
