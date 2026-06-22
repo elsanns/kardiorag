@@ -83,7 +83,7 @@ anglojęzyczne):
 | **Higiena platformy** | | |
 | `security-headers` | ✅ | CSP z nonce, `X-Frame-Options: DENY`, `nosniff`, `Referrer-Policy`, `Permissions-Policy`, HSTS (po TLS). |
 | `auditability` | ✅ | Audit log zdarzeń (submit, flagged-input, ungrounded, ingest) z IP i providerem. |
-| `supply-chain` | ❌ | **TODO:** pinowanie/patchowanie zależności Composer, binarki Ollama i modeli; skan podatności. |
+| `supply-chain` | ❌ | **TODO:** przypinanie wersji Ollama i modeli. |
 
 ## Interfejs
 
