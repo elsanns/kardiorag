@@ -62,21 +62,27 @@ anglojęzyczne):
 
 | Ryzyko | Status | Opis |
 |---|:--:|---|
-| `sql-injection` | ✅ | Zapytania parametryzowane; dane użytkownika tylko jako bind (`?::vector`) + allowlista leków/pól. |
+| **Integralność odpowiedzi** | | |
 | `xss` / output-handling | ✅ | Render jako tekst (`textContent`/DOM), `safeHttpUrl` (http/https), escaping Blade `{{ }}`. **TODO:** sanityzacja, gdyby renderować HTML/Markdown. |
-| `security-headers` | ✅ | CSP z nonce, `X-Frame-Options: DENY`, `nosniff`, `Referrer-Policy`, `Permissions-Policy`, HSTS (po TLS). |
-| `csrf` | ✅ | Token grupy `web`; `<meta csrf-token>` → nagłówek `X-CSRF-TOKEN` na `POST /ask`. |
-| `model-lokalny` / `rezydencja-danych` | ✅ | W domyślnej konfiguracji z modelem lokalnym (Ollama) embeddingi nie opuszczają serwera. |
-| `auditability` | ✅ | Audit log zdarzeń (submit, flagged-input, ungrounded, ingest) z IP i providerem. |
 | `prompt-injection` | 🟡 | Na prompt składają się 3 źródła: **system-prompt** — zaufany (answer-only-from-sources / cite `[n]` / refuse / ignore-instructions-in-sources); **tekst z bazy wiedzy** — **zaufany** (openFDA + allowlista ingestu, brak uploadów → brak injection pośredniego); **wejście użytkownika** — częściowo obsłużone (flagowane i logowane, **nie blokowane**). Kontrola tekstu wprowadzonego przez użytkownika: grounding guard + model bez narzędzi. |
-| `dos` / cost-resource-abuse | 🟡 | Walidacja (5–500 zn.), limity per-IP (ask 10/min, status 120, api 60, ingest 10), dzienny cap (200 → 429), kolejka async. **TODO:** per-IP dzienny limit, limit głębokości kolejki/współbieżności, spend cap chmury. |
+| **Dane wrażliwe** | | |
+| `model-lokalny` / `rezydencja-danych` | ✅ | W domyślnej konfiguracji z modelem lokalnym (Ollama) embeddingi nie opuszczają serwera. |
 | `ekspozycja-modelu` (Ollama) | 🟡 | Domyślnie loopback (`127.0.0.1`). **TODO:** nie eksponować portu; auth + TLS przy pracy cross-host. |
 | `secrets-management` / log-hygiene | 🟡 | Klucze w `.env` (gitignored), puste domyślnie. **TODO:** scrubbing `Authorization`/`x-api-key` z logów; potwierdzić docroot `public/`. |
 | `ssrf` | 🟡 | Niskie ryzyko z założenia — adresy z configu, `drug` z allowlisty, pytanie w body. **TODO:** allowlista hostów, blokada zakresów prywatnych/metadanych, ograniczenie redirectów, IMDSv2. |
 | `transport-security` / `tls` | 🟡 | Kod gotowy — HSTS warunkowy (`$request->secure()`). **TODO:** terminacja TLS + trusted proxy; reverse-proxy/TLS+auth dla Ollamy. |
 | `przechowywanie-danych-wrazliwych` (PHI) | ❌ | **TODO:** brak przechowywania/redakcja PII, szyfrowanie at-rest, retencja/purge, notka „bez danych pacjenta", uwierzytelnienie listy „ostatnich pytań". |
-| `authentication` / access-control | ❌ | Poza zakresem (świadomie); uwierzytelnianie/RBAC jako future work. |
 | `info-disclosure` (debug/errors) | ❌ | **TODO:** `APP_DEBUG=false` + `APP_ENV=production`; generyczne strony błędów. |
+| **DoS** | | |
+| `dos` / cost-resource-abuse | 🟡 | Walidacja (5–500 zn.), limity per-IP (ask 10/min, status 120, api 60, ingest 10), dzienny cap (200 → 429), kolejka async. **TODO:** per-IP dzienny limit, limit głębokości kolejki/współbieżności, spend cap chmury. |
+| **Nieautoryzowane operacje** | | |
+| `sql-injection` | ✅ | Zapytania parametryzowane; dane użytkownika tylko jako bind (`?::vector`) + allowlista leków/pól. |
+| `csrf` | ✅ | Token grupy `web`; `<meta csrf-token>` → nagłówek `X-CSRF-TOKEN` na `POST /ask`. |
+| **Kontrola dostępu** | | |
+| `authentication` / access-control | ❌ | Poza zakresem (świadomie); uwierzytelnianie/RBAC jako future work. |
+| **Higiena platformy** | | |
+| `security-headers` | ✅ | CSP z nonce, `X-Frame-Options: DENY`, `nosniff`, `Referrer-Policy`, `Permissions-Policy`, HSTS (po TLS). |
+| `auditability` | ✅ | Audit log zdarzeń (submit, flagged-input, ungrounded, ingest) z IP i providerem. |
 | `supply-chain` | ❌ | **TODO:** pinowanie/patchowanie zależności Composer, binarki Ollama i modeli; skan podatności. |
 
 ## Interfejs
