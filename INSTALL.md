@@ -38,6 +38,7 @@ OLLAMA_EMBED_MODEL=nomic-embed-text
 EMBED_DIM=768                  # must match the embedding model (nomic-embed-text = 768)
 # OLLAMA_BASE_URL defaults to http://127.0.0.1:11434 (Ollama's default port);
 # set it only to point at a different port or a remote Ollama host.
+OPENFDA_API_KEY=               # optional; raises the openFDA rate limit (see step 5)
 ```
 
 ## 3. Set up the database
@@ -81,6 +82,10 @@ php artisan kardiorag:ingest
 
 Pass generic names to limit the set (e.g. `kardiorag:ingest amiodarone metoprolol`); add `--queue` to
 dispatch jobs to the queue instead of running inline.
+
+> openFDA's unauthenticated limit is **1000 requests/day per IP** (240/min). The default ingest makes
+> ~1 request per drug (≈8 total), well within that. For heavier use, get a free key and set
+> `OPENFDA_API_KEY` in `.env` to raise the limit.
 
 ## 6. Run
 
