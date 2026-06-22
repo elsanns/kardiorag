@@ -59,7 +59,7 @@ niepustą odpowiedź z cytatami do źródeł:
 
 ## Bezpieczeństwo
 
-**Legenda:** ✅ obsługiwane · 🟡 częściowo · ❌ nieobsługiwane *(planowane / poza zakresem)* · w opisie etykieta **TODO** oznacza pracę do wykonania
+**Legenda:** ✅ obsługiwane · 🟡 częściowo · ❌ nieobsługiwane *(planowane / poza zakresem)*
 
 | Ryzyko | Status | Opis |
 |---|:--:|---|
