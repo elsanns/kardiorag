@@ -1,6 +1,6 @@
 # KardioRAG
 
-System oparty na architekturze RAG (Retrieval-Augmented Generation) umożliwia zadawanie pytań w języku naturalnym i generowanie odpowiedzi na podstawie informacji zgromadzonych w publicznie dostępnej bazie wiedzy [openFDA](https://open.fda.gov/apis/drug/label/). W domyślnej konfiguracji wykorzystuje lokalny model Llama.
+Prototyp systemu opartego na architekturze RAG (Retrieval-Augmented Generation) umożliwia zadawanie pytań w języku naturalnym i generowanie odpowiedzi na podstawie informacji zgromadzonych w publicznie dostępnej bazie wiedzy [openFDA](https://open.fda.gov/apis/drug/label/). W domyślnej konfiguracji wykorzystuje lokalny model Llama.
 
 ## Instalacja
 
