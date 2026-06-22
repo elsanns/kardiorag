@@ -73,13 +73,13 @@ anglojęzyczne):
 | `transport-security` / `tls` | 🟡 | Kod gotowy — HSTS warunkowy (`$request->secure()`). **TODO:** terminacja TLS + trusted proxy; reverse-proxy/TLS+auth dla Ollamy. |
 | `przechowywanie-danych-wrazliwych` (PHI) | ❌ | **TODO:** brak przechowywania/redakcja PII, szyfrowanie at-rest, retencja/purge, notka „bez danych pacjenta", uwierzytelnienie listy „ostatnich pytań". |
 | `info-disclosure` (debug/errors) | ❌ | **TODO:** `APP_DEBUG=false` + `APP_ENV=production`; generyczne strony błędów. |
-| **DoS** | | |
-| `dos` / cost-resource-abuse | 🟡 | Walidacja (5–500 zn.), limity per-IP (ask 10/min, status 120, api 60, ingest 10), dzienny cap (200 → 429), kolejka async. **TODO:** per-IP dzienny limit, limit głębokości kolejki/współbieżności, spend cap chmury. |
 | **Nieautoryzowane operacje** | | |
 | `sql-injection` | ✅ | Zapytania parametryzowane; dane użytkownika tylko jako bind (`?::vector`) + allowlista leków/pól. |
 | `csrf` | ✅ | Token grupy `web`; `<meta csrf-token>` → nagłówek `X-CSRF-TOKEN` na `POST /ask`. |
 | **Kontrola dostępu** | | |
 | `authentication` / access-control | ❌ | Poza zakresem (świadomie); uwierzytelnianie/RBAC jako future work. |
+| **DoS** | | |
+| `dos` / cost-resource-abuse | 🟡 | Walidacja (5–500 zn.), limity per-IP (ask 10/min, status 120, api 60, ingest 10), dzienny cap (200 → 429), kolejka async. **TODO:** per-IP dzienny limit, limit głębokości kolejki/współbieżności, spend cap chmury. |
 | **Higiena platformy** | | |
 | `security-headers` | ✅ | CSP z nonce, `X-Frame-Options: DENY`, `nosniff`, `Referrer-Policy`, `Permissions-Policy`, HSTS (po TLS). |
 | `auditability` | ✅ | Audit log zdarzeń (submit, flagged-input, ungrounded, ingest) z IP i providerem. |
