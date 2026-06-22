@@ -77,7 +77,7 @@ anglojęzyczne):
 | `sql-injection` | ✅ | Zapytania parametryzowane; dane użytkownika tylko jako bind (`?::vector`) + allowlista leków/pól. |
 | `csrf` | ✅ | Token grupy `web`; `<meta csrf-token>` → nagłówek `X-CSRF-TOKEN` na `POST /ask`. |
 | **Kontrola dostępu** | | |
-| `authentication` / access-control | ❌ | Poza zakresem (świadomie); uwierzytelnianie/RBAC jako future work. |
+| `authentication` / access-control | ❌ | Poza zakresem; uwierzytelnianie/RBAC jako future work. |
 | **DoS** | | |
 | `dos` / cost-resource-abuse | 🟡 | Walidacja (5–500 zn.), limity per-IP (ask 10/min, status 120, api 60, ingest 10), dzienny cap (200 → 429), kolejka async. **TODO:** per-IP dzienny limit, limit głębokości kolejki/współbieżności, spend cap chmury. |
 | **Higiena platformy** | | |
