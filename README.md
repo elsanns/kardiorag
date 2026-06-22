@@ -1,9 +1,6 @@
 # KardioRAG
 
-System, oparty na lokalnym modelu Llama, wyszukuje informacje w otwartej bazie danych o lekach
-openFDA (etykiety produktów leczniczych, jęz. angielski). Użytkownik zadaje pytania w języku
-naturalnym. System znajduje w bazie fragmenty tekstu zawierające potrzebne informacje; pełne
-etykiety dostępne są przez link do DailyMed. W domyślnej konfiguracji wykorzystuje model lokalny.
+System oparty na architekturze RAG (Retrieval-Augmented Generation) umożliwia zadawanie pytań w języku naturalnym i generowanie odpowiedzi na podstawie informacji zgromadzonych w publicznie dostępnej bazie wiedzy [openFDA](https://open.fda.gov/). W domyślnej konfiguracji wykorzystuje lokalny model Llama.
 
 ## Instalacja
 
