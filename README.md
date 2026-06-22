@@ -93,7 +93,6 @@ anglojęzyczne):
 - Backend: PHP 8.3, Laravel 13.
 - Baza danych: PostgreSQL + pgvector (wyszukiwanie wektorowe, cosine distance).
 - Modele lokalne: Ollama — `llama3.2:3b` (czat) i `nomic-embed-text` (embeddingi 768-wymiarowe); opcjonalnie chmura (OpenAI / Gemini / Anthropic, tylko czat) — domyślnie wyłączona.
-- Przetwarzanie asynchroniczne: kolejka bazodanowa (database) z workerem (generowanie odpowiedzi, ingest danych).
 - Front-end: Blade, JavaScript, Vite, Tailwind CSS.
 - Narzędzia: PHPUnit 12, Laravel Pint.
 - Projekt został opracowany przy wsparciu Claude Code.
