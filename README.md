@@ -99,4 +99,4 @@ anglojęzyczne):
 - Przetwarzanie asynchroniczne: kolejka bazodanowa (database) z workerem (generowanie odpowiedzi, ingest danych).
 - Front-end: Blade, JavaScript, Vite, Tailwind CSS.
 - Narzędzia: PHPUnit 12, Laravel Pint.
-- Projekt został opracowany przy wsparciu [Claude Code](https://claude.com/claude-code).
+- Projekt został opracowany przy wsparciu Claude Code.
