@@ -59,15 +59,15 @@ niepustą odpowiedź z cytatami do źródeł:
 
 ## Interfejs
 
-![Wynik zapytania z cytatami i fragmentami źródłowymi](docs/img/ui-result.png)
+<img src="docs/img/ui-result.png" alt="Wynik zapytania z cytatami i fragmentami źródłowymi" width="800">
 
 *Wynik zapytania: odpowiedź z cytatami `[n]` oraz rozwijane fragmenty źródłowe, każdy z odległością wektorową i linkiem do pełnej etykiety.*
 
-![Pełna etykieta leku w DailyMed otwarta z cytatu](docs/img/ui-citation-dailymed.png)
+<img src="docs/img/ui-citation-dailymed.png" alt="Pełna etykieta leku w DailyMed otwarta z cytatu" width="800">
 
 *Link „view full label ↗" przy cytacie otwiera pełną etykietę produktu w DailyMed (tu: Pacerone / amiodarone).*
 
-![Panel ze statystykami ingestu i zapytań](docs/img/ui-dashboard.png)
+<img src="docs/img/ui-dashboard.png" alt="Panel ze statystykami ingestu i zapytań" width="800">
 
 *Panel (dashboard): statystyki zaimportowanej bazy wiedzy (leki, dokumenty, chunki) oraz analityka zapytań.*
 
