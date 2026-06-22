@@ -21,7 +21,7 @@ Pełna instrukcja instalacji i uruchomienia: [instrukcja instalacji](INSTALL.md)
 - Dane pochodzą z etykiet produktów leczniczych FDA (SPL); pełne etykiety: [DailyMed](https://dailymed.nlm.nih.gov).
 - Licencja: [openFDA — domena publiczna USA (CC0 1.0)](https://open.fda.gov/license/)
 - Zastrzeżenie (z aplikacji): *„Source: openFDA (U.S. FDA, public domain). For demonstration only — not for clinical decision-making; no FDA endorsement implied."*
-- Zakres: kuratorowany zestaw leków kardiologicznych — amiodarone, metoprolol, warfarin, atorvastatin, lisinopril, apixaban, digoxin, furosemide.
+- Zakres: zestaw leków kardiologicznych — amiodarone, metoprolol, warfarin, atorvastatin, lisinopril, apixaban, digoxin, furosemide.
 
 ## Grounding
 
@@ -48,8 +48,7 @@ Wyszukiwanie odpowiedzi w bazie wiedzy przebiega wieloetapowo:
 ## Przykładowe pytania
 
 Pytania zadawane są po angielsku (baza wiedzy i słowa-klucze rozpoznające sekcję etykiety są
-anglojęzyczne). Poniższe zapytania zweryfikowano end-to-end na lokalnym modelu — każde zwraca
-niepustą odpowiedź z cytatami do źródeł:
+anglojęzyczne):
 
 - `What are the contraindications of amiodarone?`
 - `What are the common side effects of metoprolol?`
@@ -67,7 +66,7 @@ niepustą odpowiedź z cytatami do źródeł:
 | `xss` / output-handling | ✅ | Render jako tekst (`textContent`/DOM), `safeHttpUrl` (http/https), escaping Blade `{{ }}`. **TODO:** sanityzacja, gdyby renderować HTML/Markdown. |
 | `security-headers` | ✅ | CSP z nonce, `X-Frame-Options: DENY`, `nosniff`, `Referrer-Policy`, `Permissions-Policy`, HSTS (po TLS). |
 | `csrf` | ✅ | Token grupy `web`; `<meta csrf-token>` → nagłówek `X-CSRF-TOKEN` na `POST /ask`. |
-| `model-lokalny` / `rezydencja-danych` | ✅ | Local-first (Ollama); embeddingi **zawsze** lokalne; tryb chmurowy wyłączony (puste klucze, fail-loud). |
+| `model-lokalny` / `rezydencja-danych` | ✅ | W domyślnej konfiguracji z modelem lokalnym (Ollama) embeddingi nie opuszczają serwera. |
 | `auditability` | ✅ | Audit log zdarzeń (submit, flagged-input, ungrounded, ingest) z IP i providerem. |
 | `prompt-injection` | 🟡 | Na prompt składają się 3 źródła: **system-prompt** — nasz, zaufany (answer-only-from-sources / cite `[n]` / refuse / ignore-instructions-in-sources); **tekst z bazy wiedzy** — **zaufany** (openFDA + allowlista ingestu, brak uploadów → brak injection pośredniego); **wejście użytkownika** — częściowo obsłużone (flagowane i logowane, **nie blokowane**). Backstopy dla wejścia użytkownika: grounding guard + model bez narzędzi. |
 | `dos` / cost-resource-abuse | 🟡 | Walidacja (5–500 zn.), limity per-IP (ask 10/min, status 120, api 60, ingest 10), dzienny cap (200 → 429), kolejka async. **TODO:** per-IP dzienny limit, limit głębokości kolejki/współbieżności, spend cap chmury. |
