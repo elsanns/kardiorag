@@ -84,4 +84,4 @@ niepustą odpowiedź z cytatami do źródeł:
 
 <img src="docs/img/ui-result.png" alt="Wynik zapytania z cytatami i fragmentami źródłowymi" width="760">
 
-*Wynik zapytania: odpowiedź z cytatami `[n]` oraz rozwijane fragmenty źródłowe (tu pierwsze trafienia), każde z odległością wektorową i linkiem do pełnej etykiety.*
+*Wynik zapytania: odpowiedź z cytatami `[n]` oraz rozwijane fragmenty źródłowe (tu pierwsze trafienia), każde z informacją o podobieństwie (cosine distance) i linkiem do pełnej etykiety.*
