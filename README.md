@@ -66,7 +66,7 @@ anglojęzyczne):
 | `model-lokalny` / `rezydencja-danych` | ✅ | W domyślnej konfiguracji z modelem lokalnym (Ollama) embeddingi nie opuszczają serwera. |
 | `ekspozycja-modelu` (Ollama) | 🟡 | Połączenie z Ollamą domyślnie po loopbacku (`127.0.0.1:11434`) — port modelu nie jest wystawiony na zewnątrz. **TODO:** dodać TLS i uwierzytelnianie, jeśli Ollama nasłuchuje poza loopbackiem (np. na `0.0.0.0`). |
 | `ssrf` | ✅ | Komunikacja wychodząca z serwera nie zawiera tekstu wpisanego przez użytkownika — adres usługi (openFDA) pochodzi z konfiguracji, a jedyny parametr od użytkownika to nazwa leku z zamkniętej listy (allowlista). |
-| `przechowywanie-danych-wrazliwych` (PHI) | ❌ | **TODO:** brak przechowywania/redakcja PII, szyfrowanie at-rest, retencja/purge, notka „bez danych pacjenta", uwierzytelnienie listy „ostatnich pytań". |
+| `przechowywanie-danych-wrazliwych` (PHI) | ❌ | Obsługa potencjalnego wprowadzenia danych wrażliwych przez użytkownika: tekst zapytań przechowywany w bazie danych, a lista ostatnich zapytań wyświetlana w interfejsie. **TODO:** nie przechowywać/redagować PII, szyfrowanie at-rest, retencja/purge. |
 | `info-disclosure` (debug/errors) | ❌ | **TODO:** `APP_DEBUG=false` + `APP_ENV=production`; generyczne strony błędów. |
 | **Nieautoryzowane operacje** | | |
 | `sql-injection` | ✅ | Zapytania parametryzowane; dane użytkownika tylko jako bind (`?::vector`) + allowlista leków/pól. |
