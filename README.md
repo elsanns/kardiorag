@@ -66,7 +66,6 @@ anglojęzyczne):
 | `model-lokalny` / `rezydencja-danych` | ✅ | W domyślnej konfiguracji z modelem lokalnym (Ollama) embeddingi nie opuszczają serwera. |
 | `ekspozycja-modelu` (Ollama) | 🟡 | Połączenie z Ollamą domyślnie po loopbacku (`127.0.0.1:11434`) — port modelu nie jest wystawiony na zewnątrz. **TODO:** dodać TLS i uwierzytelnianie, jeśli Ollama nasłuchuje poza loopbackiem (np. na `0.0.0.0`). |
 | `ssrf` | ✅ | Komunikacja wychodząca z serwera nie zawiera tekstu wpisanego przez użytkownika — adres usługi (openFDA) pochodzi z konfiguracji, a jedyny parametr od użytkownika to nazwa leku z zamkniętej listy (allowlista). |
-| `transport-security` / `tls` | 🟡 | Kod gotowy — HSTS warunkowy (`$request->secure()`). **TODO:** terminacja TLS + trusted proxy; reverse-proxy/TLS+auth dla Ollamy. |
 | `przechowywanie-danych-wrazliwych` (PHI) | ❌ | **TODO:** brak przechowywania/redakcja PII, szyfrowanie at-rest, retencja/purge, notka „bez danych pacjenta", uwierzytelnienie listy „ostatnich pytań". |
 | `info-disclosure` (debug/errors) | ❌ | **TODO:** `APP_DEBUG=false` + `APP_ENV=production`; generyczne strony błędów. |
 | **Nieautoryzowane operacje** | | |
