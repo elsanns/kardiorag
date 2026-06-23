@@ -3,6 +3,23 @@
 Running log of fixes made in response to [security-and-best-practices-review.md](security-and-best-practices-review.md).
 Newest first. Each entry: what was wrong, what changed, and how it's verified.
 
+## 2026-06-23 — 🟠 MEDIUM: jobs lacked failure handling; ingestion not unique
+
+**Problem.** Neither queued job implemented `failed()`. If `AnswerQuestionJob` died outside
+`RagService::runQuery`'s own try/catch (e.g. a worker `--timeout` kill), the `Query` stayed
+`processing` and the polling UI waited forever. And `IngestDrugJob` was not unique, so the same drug
+could be ingested twice concurrently (re-fetch + delete + re-embed is unsafe to run in parallel).
+
+**Fix.**
+- `app/Jobs/AnswerQuestionJob.php` — add `failed(?Throwable $e)` that marks a still-`pending`/`processing`
+  query as `failed` and records the error, without clobbering an already-`done` query.
+- `app/Jobs/IngestDrugJob.php` — implement `ShouldBeUnique` keyed on the drug name (`uniqueId()`), and add
+  `failed()` that logs the failure.
+
+**Test.** `tests/Feature/JobReliabilityTest.php` — asserts `failed()` marks a processing query failed,
+does not overwrite a completed query, and that `IngestDrugJob` is `ShouldBeUnique` with `uniqueId()` =
+the drug name. Full suite green (33 tests, 95 assertions); `vendor/bin/pint --dirty` clean.
+
 ## 2026-06-23 — 🔴 HIGH: queue `retry_after` shorter than job timeouts
 
 **Problem.** `config/queue.php` set the database queue `retry_after` to `90s`, but jobs run far longer —
