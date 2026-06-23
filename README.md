@@ -64,7 +64,7 @@ anglojęzyczne):
 | `prompt-injection` | 🟡 | Na prompt składają się 3 źródła: **system-prompt** — zaufany (answer-only-from-sources / cite `[n]` / refuse / ignore-instructions-in-sources); **tekst z bazy wiedzy** — **zaufany** (openFDA + allowlista ingestu, brak uploadów → brak injection pośredniego); **wejście użytkownika** — częściowo obsłużone (flagowane i logowane, **nie blokowane**). Kontrola tekstu wprowadzonego przez użytkownika: grounding guard + model bez narzędzi. **TODO:** wykrywanie wstrzyknięć w wejściu użytkownika opiera się na czarnej liście (black list, `INPUT_PATTERNS`) łatwej do obejścia — jawne, dosłowne wzorce, wyłącznie w języku angielskim. |
 | **Dane wrażliwe** | | |
 | `model-lokalny` / `rezydencja-danych` | ✅ | W domyślnej konfiguracji z modelem lokalnym (Ollama) embeddingi nie opuszczają serwera. |
-| `ekspozycja-modelu` (Ollama) | 🟡 | Domyślnie loopback (`127.0.0.1`). **TODO:** nie eksponować portu; auth + TLS przy pracy cross-host. |
+| `ekspozycja-modelu` (Ollama) | 🟡 | Połączenie z Ollamą domyślnie po loopbacku (`127.0.0.1:11434`) — port modelu nie jest wystawiony na zewnątrz. **TODO:** dodać TLS i uwierzytelnianie, jeśli Ollama nasłuchuje poza loopbackiem (np. na `0.0.0.0`). |
 | `secrets-management` / log-hygiene | 🟡 | Klucze w `.env` (gitignored), puste domyślnie. **TODO:** scrubbing `Authorization`/`x-api-key` z logów; potwierdzić docroot `public/`. |
 | `ssrf` | 🟡 | Niskie ryzyko z założenia — adresy z configu, `drug` z allowlisty, pytanie w body. **TODO:** allowlista hostów, blokada zakresów prywatnych/metadanych, ograniczenie redirectów, IMDSv2. |
 | `transport-security` / `tls` | 🟡 | Kod gotowy — HSTS warunkowy (`$request->secure()`). **TODO:** terminacja TLS + trusted proxy; reverse-proxy/TLS+auth dla Ollamy. |
