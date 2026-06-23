@@ -61,7 +61,7 @@ anglojęzyczne):
 |---|:--:|---|
 | **Integralność odpowiedzi** | | |
 | `xss` / output-handling | ✅ | Treść (odpowiedź, źródła) renderowana jako tekst, nie znaczniki — po stronie klienta `textContent`/DOM, po stronie serwera escaping Blade `{{ }}`; odnośniki tylko http/https (`safeHttpUrl`). |
-| `prompt-injection` | 🟡 | Na prompt składają się 3 źródła: **system-prompt** — zaufany (answer-only-from-sources / cite `[n]` / refuse / ignore-instructions-in-sources); **tekst z bazy wiedzy** — **zaufany** (openFDA + allowlista ingestu, brak uploadów → brak injection pośredniego); **wejście użytkownika** — częściowo obsłużone (flagowane i logowane, **nie blokowane**). Kontrola tekstu wprowadzonego przez użytkownika: grounding guard + model bez narzędzi. |
+| `prompt-injection` | 🟡 | Na prompt składają się 3 źródła: **system-prompt** — zaufany (answer-only-from-sources / cite `[n]` / refuse / ignore-instructions-in-sources); **tekst z bazy wiedzy** — **zaufany** (openFDA + allowlista ingestu, brak uploadów → brak injection pośredniego); **wejście użytkownika** — częściowo obsłużone (flagowane i logowane, **nie blokowane**). Kontrola tekstu wprowadzonego przez użytkownika: grounding guard + model bez narzędzi. **TODO:** wykrywanie wstrzyknięć w wejściu użytkownika opiera się na czarnej liście (black list, `INPUT_PATTERNS`) łatwej do obejścia — jawne, dosłowne wzorce, wyłącznie w języku angielskim. |
 | **Dane wrażliwe** | | |
 | `model-lokalny` / `rezydencja-danych` | ✅ | W domyślnej konfiguracji z modelem lokalnym (Ollama) embeddingi nie opuszczają serwera. |
 | `ekspozycja-modelu` (Ollama) | 🟡 | Domyślnie loopback (`127.0.0.1`). **TODO:** nie eksponować portu; auth + TLS przy pracy cross-host. |
