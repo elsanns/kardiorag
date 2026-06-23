@@ -97,4 +97,4 @@ anglojęzyczne):
 - [Przegląd bezpieczeństwa i dobrych praktyk](docs/security-and-best-practices-review.md)
 - [Wprowadzone poprawki](docs/fixes-applied.md)
 
-Przegląd i poprawki powstały z wykorzystaniem wiedzy Laravel Boost (serwer MCP) — skill `laravel-best-practices` oraz narzędzia MCP (m.in. `search-docs`, `database-schema`).
+Zrealizowane przy wsparciu Laravel Boost.
