@@ -75,7 +75,6 @@ anglojęzyczne):
 | **DoS** | | |
 | `dos` / cost-resource-abuse | 🟡 | Kontrola długości wprowadzanego tekstu (wymagane 5-500 znaków); ograniczenie liczby pytań z jednego adresu IP (10 pytań na minutę); kontrola częstości odpytywania o status odpowiedzi z jednego adresu IP (120 zapytań na minutę); ograniczenie liczby żądań pobrania etykiet leków z openFDA do bazy wiedzy, z jednego adresu IP (10 żądań na minutę); dzienny globalny limit liczby generowanych odpowiedzi (200 dziennie; po przekroczeniu odpowiedź 429). **TODO:** dzienny limit zapytań w przeliczeniu na adres IP (obecnie limit dzienny jest tylko globalny). |
 | **Higiena platformy** | | |
-| `auditability` | ✅ | Audit log zdarzeń (submit, flagged-input, ungrounded, ingest) z IP i providerem. |
 | `supply-chain` | ❌ | **TODO:** przypinanie wersji Ollama i modeli. |
 
 ## Interfejs
