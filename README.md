@@ -90,4 +90,4 @@ anglojęzyczne):
 - Modele lokalne: Ollama — `llama3.2:3b` (czat) i `nomic-embed-text` (embeddingi 768-wymiarowe); opcjonalnie chmura (OpenAI / Gemini / Anthropic, tylko czat) — domyślnie wyłączona.
 - Front-end: Blade, JavaScript, Vite, Tailwind CSS.
 - Narzędzia: PHPUnit 12, Laravel Pint.
-- Projekt został opracowany przy wsparciu Claude Code.
+- Projekt został opracowany przy wsparciu Claude Code z Laravel Boost.
