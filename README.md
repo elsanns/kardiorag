@@ -68,7 +68,7 @@ anglojęzyczne):
 | `ssrf` | ✅ | Komunikacja wychodząca z serwera nie zawiera tekstu wpisanego przez użytkownika — adres usługi (openFDA) pochodzi z konfiguracji, a jedyny parametr od użytkownika to nazwa leku z zamkniętej listy (allowlista). |
 | `przechowywanie-danych-wrazliwych` (PHI) | ❌ | Obsługa potencjalnego wprowadzenia danych wrażliwych przez użytkownika: tekst zapytań przechowywany w bazie danych, a lista ostatnich zapytań wyświetlana w interfejsie. **TODO:** nie przechowywać/redagować PII, szyfrowanie at-rest, retencja/purge. |
 | **Nieautoryzowane operacje** | | |
-| `sql-injection` | ✅ | Zapytania parametryzowane; dane użytkownika tylko jako bind (`?::vector`) + allowlista leków/pól. |
+| `sql-injection` | ✅ | Zapytania parametryzowane; dane użytkownika tylko jako bind (`?::vector`). |
 | `csrf` | ✅ | Token grupy `web`; `<meta csrf-token>` → nagłówek `X-CSRF-TOKEN` na `POST /ask`. |
 | **Kontrola dostępu** | | |
 | `authentication` / access-control | ❌ | Poza zakresem; uwierzytelnianie/RBAC jako future work. |
