@@ -69,7 +69,7 @@ anglojęzyczne):
 | `przechowywanie-danych-wrazliwych` (PHI) | ❌ | Obsługa potencjalnego wprowadzenia danych wrażliwych przez użytkownika: tekst zapytań przechowywany w bazie danych, a lista ostatnich zapytań wyświetlana w interfejsie. **TODO:** nie przechowywać/redagować PII, szyfrowanie at-rest, retencja/purge. |
 | **Nieautoryzowane operacje** | | |
 | `sql-injection` | ✅ | Zapytania parametryzowane; dane użytkownika tylko jako bind (`?::vector`). |
-| `csrf` | ✅ | Token grupy `web`; `<meta csrf-token>` → nagłówek `X-CSRF-TOKEN` na `POST /ask`. |
+| `csrf` | ✅ | Żądania zmieniające stan (`POST /ask`) wymagają tokena CSRF. |
 | **Kontrola dostępu** | | |
 | `authentication` / access-control | ❌ | Poza zakresem; uwierzytelnianie/RBAC jako future work. |
 | **DoS** | | |
