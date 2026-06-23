@@ -65,7 +65,6 @@ anglojęzyczne):
 | **Dane wrażliwe** | | |
 | `model-lokalny` / `rezydencja-danych` | ✅ | W domyślnej konfiguracji z modelem lokalnym (Ollama) embeddingi nie opuszczają serwera. |
 | `ekspozycja-modelu` (Ollama) | 🟡 | Połączenie z Ollamą domyślnie po loopbacku (`127.0.0.1:11434`) — port modelu nie jest wystawiony na zewnątrz. **TODO:** dodać TLS i uwierzytelnianie, jeśli Ollama nasłuchuje poza loopbackiem (np. na `0.0.0.0`). |
-| `secrets-management` / log-hygiene | 🟡 | Klucze w `.env` (gitignored), puste domyślnie. **TODO:** scrubbing `Authorization`/`x-api-key` z logów; potwierdzić docroot `public/`. |
 | `ssrf` | 🟡 | Niskie ryzyko z założenia — adresy z configu, `drug` z allowlisty, pytanie w body. **TODO:** allowlista hostów, blokada zakresów prywatnych/metadanych, ograniczenie redirectów, IMDSv2. |
 | `transport-security` / `tls` | 🟡 | Kod gotowy — HSTS warunkowy (`$request->secure()`). **TODO:** terminacja TLS + trusted proxy; reverse-proxy/TLS+auth dla Ollamy. |
 | `przechowywanie-danych-wrazliwych` (PHI) | ❌ | **TODO:** brak przechowywania/redakcja PII, szyfrowanie at-rest, retencja/purge, notka „bez danych pacjenta", uwierzytelnienie listy „ostatnich pytań". |
