@@ -1,6 +1,5 @@
 /vendor
 .env
 
-# Local-only docs (kept on disk, excluded from this repo)
-docs/*.md
-docs/*.html
+# Local-only working docs (kept on disk, excluded from this repo)
+/local-docs/
