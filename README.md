@@ -60,7 +60,7 @@ anglojęzyczne):
 | Ryzyko | Status | Opis |
 |---|:--:|---|
 | **Integralność odpowiedzi** | | |
-| `xss` / output-handling | ✅ | Render jako tekst (`textContent`/DOM), `safeHttpUrl` (http/https), escaping Blade `{{ }}`. **TODO:** sanityzacja, gdyby renderować HTML/Markdown. |
+| `xss` / output-handling | ✅ | Treść (odpowiedź, źródła) renderowana jako tekst, nie znaczniki — po stronie klienta `textContent`/DOM, po stronie serwera escaping Blade `{{ }}`; odnośniki tylko http/https (`safeHttpUrl`). |
 | `prompt-injection` | 🟡 | Na prompt składają się 3 źródła: **system-prompt** — zaufany (answer-only-from-sources / cite `[n]` / refuse / ignore-instructions-in-sources); **tekst z bazy wiedzy** — **zaufany** (openFDA + allowlista ingestu, brak uploadów → brak injection pośredniego); **wejście użytkownika** — częściowo obsłużone (flagowane i logowane, **nie blokowane**). Kontrola tekstu wprowadzonego przez użytkownika: grounding guard + model bez narzędzi. |
 | **Dane wrażliwe** | | |
 | `model-lokalny` / `rezydencja-danych` | ✅ | W domyślnej konfiguracji z modelem lokalnym (Ollama) embeddingi nie opuszczają serwera. |
