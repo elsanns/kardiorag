@@ -8,7 +8,9 @@ Findings are grounded in the code (file:line). **No code was changed** — fixes
 
 ## A. Laravel best-practices (code)
 
-### 🔴 HIGH — `retry_after` shorter than job timeouts → duplicate / failed jobs
+_Items marked ✅ FIXED have been addressed — see [fixes-applied.md](fixes-applied.md)._
+
+### 🔴 HIGH — `retry_after` shorter than job timeouts → duplicate / failed jobs · ✅ FIXED
 
 - `config/queue.php:43` `retry_after = 90` (default `DB_QUEUE_RETRY_AFTER`), but
   `app/Jobs/AnswerQuestionJob.php:22` `timeout = 600` and `app/Jobs/IngestDrugJob.php:20` `timeout = 1200`.
@@ -20,10 +22,10 @@ Findings are grounded in the code (file:line). **No code was changed** — fixes
 
 ### 🟠 MEDIUM
 
-1. **Jobs don't implement `failed()`** (`AnswerQuestionJob`, `IngestDrugJob`). If anything throws before
+1. ✅ **FIXED** — **Jobs don't implement `failed()`** (`AnswerQuestionJob`, `IngestDrugJob`). If anything throws before
    `RagService::runQuery`'s try/catch (DI/deserialize error), the `Query` stays `processing` and the web UI
    polls forever. Add `failed(?Throwable $e)` to mark it `failed` / log.
-2. **`IngestDrugJob` not idempotent / not `ShouldBeUnique`.** With the `retry_after` bug it can run twice
+2. ✅ **FIXED** — **`IngestDrugJob` not idempotent / not `ShouldBeUnique`.** With the `retry_after` bug it can run twice
    concurrently (`Ingestor::ingestDrug` deletes + re-embeds). Add `ShouldBeUnique` keyed on the generic name.
 3. **No `connectTimeout()` / `retry()` on external HTTP.** All LLM providers
    (`app/Services/Llm/*Provider.php`) and `app/Services/OpenFda/OpenFdaClient.php:42` set only `timeout()`.
