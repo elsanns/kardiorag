@@ -91,3 +91,8 @@ anglojęzyczne):
 - Front-end: Blade, JavaScript, Vite, Tailwind CSS.
 - Narzędzia: PHPUnit 12, Laravel Pint.
 - Projekt został opracowany przy wsparciu Claude Code z Laravel Boost.
+
+## Dokumentacja
+
+- [Przegląd bezpieczeństwa i dobrych praktyk](docs/security-and-best-practices-review.md)
+- [Wprowadzone poprawki](docs/fixes-applied.md)

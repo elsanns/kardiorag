@@ -40,7 +40,9 @@ return [
             'connection' => env('DB_QUEUE_CONNECTION'),
             'table' => env('DB_QUEUE_TABLE', 'jobs'),
             'queue' => env('DB_QUEUE', 'default'),
-            'retry_after' => (int) env('DB_QUEUE_RETRY_AFTER', 90),
+            // Must exceed the longest job timeout (IngestDrugJob = 1200s) so a slow job is
+            // never wrongly re-released and run twice. See docs/fixes-applied.md.
+            'retry_after' => (int) env('DB_QUEUE_RETRY_AFTER', 1300),
             'after_commit' => false,
         ],
 

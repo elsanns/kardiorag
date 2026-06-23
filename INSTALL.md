@@ -39,6 +39,8 @@ EMBED_DIM=768                  # must match the embedding model (nomic-embed-tex
 # OLLAMA_BASE_URL defaults to http://127.0.0.1:11434 (Ollama's default port);
 # set it only to point at a different port or a remote Ollama host.
 OPENFDA_API_KEY=               # optional; raises the openFDA rate limit (see step 5)
+
+DB_QUEUE_RETRY_AFTER=1300      # must exceed the longest job timeout (ingest = 1200s); see step 6
 ```
 
 ## 3. Set up the database
@@ -95,6 +97,10 @@ dispatch jobs to the queue instead of running inline.
 php artisan serve          # http://127.0.0.1:8000
 php artisan queue:work     # separate terminal: processes question + ingest jobs
 ```
+
+> `DB_QUEUE_RETRY_AFTER` (1300s) must stay larger than the longest job timeout (ingest = 1200s) and
+> larger than the worker `--timeout`; otherwise a slow generation is re-queued while still running and
+> ends up processed twice.
 
 **CLI** — synchronous, no worker needed:
 
