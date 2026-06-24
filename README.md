@@ -1,8 +1,6 @@
 # KardioRAG
 
-Prototyp systemu opartego na architekturze RAG (Retrieval-Augmented Generation) umożliwia zadawanie pytań w języku naturalnym i generowanie odpowiedzi na podstawie informacji zgromadzonych w publicznie dostępnej bazie wiedzy [openFDA](https://open.fda.gov/apis/drug/label/). W domyślnej konfiguracji wykorzystuje lokalny model Llama. Repozytorium zawiera przykładowy zestaw skills oceniających zgodność z NIS2 dla docelowego środowiska produkcyjnego.
-
-Stworzony ze wsparciem Claude Code (Laravel Boost).
+Prototyp systemu opartego na architekturze RAG (Retrieval-Augmented Generation) umożliwia zadawanie pytań w języku naturalnym i generowanie odpowiedzi na podstawie informacji zgromadzonych w publicznie dostępnej bazie wiedzy [openFDA](https://open.fda.gov/apis/drug/label/). W domyślnej konfiguracji wykorzystuje lokalny model Llama. Repozytorium zawiera przykładowy zestaw skills oceniających zgodność z NIS2 dla docelowego środowiska produkcyjnego. Stworzony ze wsparciem Claude Code (Laravel Boost).
 
 ## Instalacja
 
