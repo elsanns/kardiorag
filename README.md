@@ -2,7 +2,7 @@
 
 Prototyp systemu opartego na architekturze RAG (Retrieval-Augmented Generation) umożliwia zadawanie pytań w języku naturalnym i generowanie odpowiedzi na podstawie informacji zgromadzonych w publicznie dostępnej bazie wiedzy [openFDA](https://open.fda.gov/apis/drug/label/). W domyślnej konfiguracji wykorzystuje lokalny model Llama. Stworzony ze wsparciem Claude Code (Laravel Boost).
 
-Repozytorium zawiera zestaw „skills" oceniających zgodność z NIS2 dla docelowego środowiska produkcyjnego (źródło: [Claude Skills – Governance, Risk & Compliance](https://github.com/Sushegaad/Claude-Skills-Governance-Risk-and-Compliance)).
+Repozytorium zawiera przykładowy zestaw skills oceniających zgodność z NIS2 dla docelowego środowiska produkcyjnego.
 
 ## Instalacja
 
@@ -99,5 +99,8 @@ anglojęzyczne):
 - [Przegląd bezpieczeństwa i dobrych praktyk](docs/security-and-best-practices-review.md)
 - [Wprowadzone poprawki](docs/fixes-applied.md)
 - [Ocena zgodności z NIS2 (docelowe środowisko produkcyjne)](docs/nis2-server-assessment.md)
+- [Zestaw skills NIS2](.claude/skills/nis2)
+
+Zestaw skills NIS2 to **przykład** pochodzący z zewnętrznego repozytorium [Claude Skills – Governance, Risk & Compliance](https://github.com/Sushegaad/Claude-Skills-Governance-Risk-and-Compliance) (licencja MIT); przed użyciem produkcyjnym wymaga weryfikacji (**TODO**).
 
 Stworzony ze wsparciem Claude Code (Laravel Boost).
