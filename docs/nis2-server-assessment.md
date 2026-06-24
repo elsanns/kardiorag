@@ -53,15 +53,18 @@ Severity reflects production risk, not current (dev) risk.
    stop using `artisan serve` as the entry point; close `:8000`/`:22` to the public internet (Art. 21(2)(e)/(h)).
 3. **`APP_DEBUG=false` + `APP_ENV=production`** before any exposure (Art. 21(2)(e)).
 4. **Clear the dependency CVEs** — `composer update guzzlehttp/guzzle guzzlehttp/psr7` to `>=7.12.1`
-   (Art. 21(2)(d); also closes the README `supply-chain` row).
+   (Art. 21(2)(d)). This is a PHP-dependency concern, separate from the README `supply-chain` row, which
+   tracks pinning Ollama and model versions.
 5. **Patch the OS** (`apt upgrade`) and enable unattended security upgrades (Art. 21(2)(g)).
 6. **Encryption** — terminate TLS, set `SESSION_ENCRYPT=true`, force HTTPS (Art. 21(2)(h)).
 7. **Incident readiness** — ship logs to a central, tamper-evident store; add alerting; pre-draft
    the Art. 23 CSIRT notification templates (24h early warning / 72h notification / 1-month report).
 
-Items 3–4 overlap with work already tracked in
-[`fixes-applied.md`](fixes-applied.md) and the security review (the `APP_DEBUG` deploy note and the
-`supply-chain` row); item 4 also complements the pending HTTP `connectTimeout`/`retry` hardening.
+Items 3–4 overlap with open findings in the
+[security review](security-and-best-practices-review.md) (the `APP_DEBUG` deploy note and the
+PHP-dependency / supply-chain concerns), neither of which is yet in
+[`fixes-applied.md`](fixes-applied.md); item 4 also complements the pending HTTP `connectTimeout`/`retry`
+hardening.
 
 ## ISO 27001 alignment
 

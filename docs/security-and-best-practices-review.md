@@ -59,9 +59,10 @@ provider factory.
 committed" claim is accurate (layout serves committed `public/css/app.css`, no `@vite`); embedded
 screenshot exists; the SSH-tunnel remote-access guidance correctly avoids exposing the unauthenticated port.
 
-1. **🟠 INSTALL step 6 reproduces the `retry_after` bug.** It says to run `php artisan queue:work` on the
-   default DB queue with no `DB_QUEUE_RETRY_AFTER`, so users hit the duplicate-job issue above. Add
-   `DB_QUEUE_RETRY_AFTER=1300` to the step-2 `.env` block.
+1. **🟠 INSTALL step 6 reproduced the `retry_after` bug · ✅ FIXED.** It told users to run `php artisan
+   queue:work` on the default DB queue with no `DB_QUEUE_RETRY_AFTER`, so they hit the duplicate-job issue
+   above. `INSTALL.md` now sets `DB_QUEUE_RETRY_AFTER=1300` in the step-2 `.env` block and adds a step-6
+   note — see [fixes-applied.md](fixes-applied.md).
 2. **🟢 `.env (gitignored)` claim (INSTALL:33) — was inaccurate, now fixed.** Until commit `81dc316` the
    repo `.gitignore` did not ignore `.env`, so that parenthetical was false (a `git add -A` could have
    committed the DB password). `.env` is now ignored — verified.
